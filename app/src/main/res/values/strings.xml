@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EasyPayTest</string>
+    <string name="login">Login</string>
+    <string name="payments">Payments</string>
+</resources>
