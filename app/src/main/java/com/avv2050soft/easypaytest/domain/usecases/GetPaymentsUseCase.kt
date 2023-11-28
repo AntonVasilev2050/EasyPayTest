@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetPaymentsUseCase @Inject constructor(
     private val repository: NetworkRepository
 ) {
-    suspend fun getPayments(): PaymentsResponse {
-        return repository.getPayments()
+    suspend fun getPayments(token: String): PaymentsResponse {
+        return repository.getPayments(token)
     }
 }

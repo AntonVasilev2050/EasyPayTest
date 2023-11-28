@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
     @SerializedName("error")
-    val error: Error,
+    val error: Error? = null,
     @SerializedName("response")
-    val response: Response,
+    val response: Response? = null,
     @SerializedName("success")
     val success: String
 )

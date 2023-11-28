@@ -2,4 +2,9 @@
     <string name="app_name">EasyPayTest</string>
     <string name="login">Login</string>
     <string name="payments">Payments</string>
+    <string name="login_hint">login</string>
+    <string name="password_hint">password</string>
+    <string name="amount_label">Amount:</string>
+    <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
 </resources>
