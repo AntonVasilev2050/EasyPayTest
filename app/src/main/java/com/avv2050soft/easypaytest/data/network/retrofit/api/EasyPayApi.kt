@@ -18,7 +18,7 @@ interface EasyPayApi {
     @Headers("app-key: 12345", "v: 1")
     @POST("login")
     suspend fun login(
-    @Body loginRequest: LoginRequest,
+        @Body loginRequest: LoginRequest,
     ): LoginResponseDto
 
     @Headers("app-key: 12345", "v: 1")
@@ -27,12 +27,12 @@ interface EasyPayApi {
         @Header("token") token: String
     ): PaymentsResponseDto
 
-    companion object{
+    companion object {
         private const val BASE_URL = "https://easypay.world/api-test/"
 
         fun create(): EasyPayApi {
             val logger =
-                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC}
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)

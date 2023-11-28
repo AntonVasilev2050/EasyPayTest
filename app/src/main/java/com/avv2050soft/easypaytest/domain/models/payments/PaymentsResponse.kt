@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class PaymentsResponse(
     @SerializedName("response")
-    val response: List<Response>,
+    val paymentItems: List<PaymentItem>,
     @SerializedName("success")
     val success: String
 )

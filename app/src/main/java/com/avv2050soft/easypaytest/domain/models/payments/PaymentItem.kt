@@ -3,11 +3,11 @@ package com.avv2050soft.easypaytest.domain.models.payments
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class PaymentItem(
     @SerializedName("amount")
-    val amount: String,
+    val amount: String?,
     @SerializedName("created")
-    val created: Int,
+    val created: Int? = null,
     @SerializedName("id")
     val id: Int,
     @SerializedName("title")

@@ -15,7 +15,7 @@ class RetrofitMapper {
 
     fun mapPaymentsResponseDtoToPaymentsResponse(paymentsResponseDto: PaymentsResponseDto): PaymentsResponse =
         PaymentsResponse(
-            response = paymentsResponseDto.response,
+            paymentItems = paymentsResponseDto.paymentItems,
             success = paymentsResponseDto.success
         )
 }

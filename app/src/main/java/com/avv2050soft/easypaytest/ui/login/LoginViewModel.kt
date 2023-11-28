@@ -40,10 +40,11 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun logout(): Boolean{
+    fun logout(): Boolean {
         var logoutResult = false
         viewModelScope.launch {
             logoutResult = logoutUseCase.logout()
+            loginUseCase.login(LoginRequest("", ""))
         }
         return logoutResult
     }

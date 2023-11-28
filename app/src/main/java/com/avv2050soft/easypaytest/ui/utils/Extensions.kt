@@ -9,6 +9,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 fun Fragment.toastString(msg: String?) {
     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -23,5 +25,19 @@ inline fun <T> Flow<T>.launchAndCollectIn(
         collect {
             action(it)
         }
+    }
+}
+
+
+fun Int.toDate(formatString: String): String {
+    val dateFormat = SimpleDateFormat(formatString, Locale.getDefault())
+    return dateFormat.format(this * 1000)
+}
+
+fun String.toAmount(): String {
+    return if (this.isNullOrBlank()) {
+        "0.00"
+    } else {
+        this
     }
 }

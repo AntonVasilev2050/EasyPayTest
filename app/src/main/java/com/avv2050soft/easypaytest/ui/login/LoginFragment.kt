@@ -27,15 +27,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 val loginRequest = LoginRequest(
                     binding.textInputLogin.text.toString(),
                     binding.textInputPassword.text.toString()
-//                    "demo",
-//                    "12345"
                 )
                 loginViewModel.login(loginRequest)
             }
         }
 
         binding.buttonLogout.setOnClickListener {
-            if (loginViewModel.logout()){
+            if (loginViewModel.logout()) {
                 toastString(LoginViewModel.LOGOUT_SUCCESS)
                 binding.buttonLogin.visibility = View.VISIBLE
                 binding.buttonLogout.visibility = View.GONE
@@ -45,7 +43,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         loginViewModel.loginResponseStateFlow.launchAndCollectIn(viewLifecycleOwner) {
-
             it?.let { loginResponse ->
                 if (loginResponse.success == "true") {
                     TokenStorage.accessToken = loginResponse.response?.token
@@ -57,6 +54,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     toastString(LoginViewModel.WRONG_LOGIN_OR_PASSWORD)
                 }
             }
+        }
+
+        loginViewModel.errorLogin.launchAndCollectIn(viewLifecycleOwner){
+            toastString(it)
         }
     }
 }
