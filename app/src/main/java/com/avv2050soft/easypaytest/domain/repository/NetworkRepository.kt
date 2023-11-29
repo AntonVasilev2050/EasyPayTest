@@ -7,5 +7,5 @@ import com.avv2050soft.easypaytest.domain.models.payments.PaymentsResponse
 interface NetworkRepository {
     suspend fun login(loginRequest: LoginRequest): LoginResponse
     suspend fun getPayments(token: String): PaymentsResponse
-    suspend fun logout(): Boolean
+    suspend fun logout(): LoginResponse
 }

@@ -29,31 +29,28 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     binding.textInputPassword.text.toString()
                 )
                 loginViewModel.login(loginRequest)
+
+                it?.let { loginResponse ->
+                    if (loginResponse.success == "true") {
+                        TokenStorage.accessToken = loginResponse.response?.token
+                        toastString(LoginViewModel.LOGIN_SUCCESS)
+                        binding.buttonLogin.visibility = View.GONE
+                        binding.buttonLogout.visibility = View.VISIBLE
+                    } else {
+                        TokenStorage.accessToken = null
+                        toastString(LoginViewModel.WRONG_LOGIN_OR_PASSWORD)
+                    }
+                }
             }
         }
 
         binding.buttonLogout.setOnClickListener {
-            if (loginViewModel.logout()) {
-                toastString(LoginViewModel.LOGOUT_SUCCESS)
-                binding.buttonLogin.visibility = View.VISIBLE
-                binding.buttonLogout.visibility = View.GONE
-                binding.textInputPassword.setText("")
-                binding.textInputLogin.setText("")
-            }
-        }
-
-        loginViewModel.loginResponseStateFlow.launchAndCollectIn(viewLifecycleOwner) {
-            it?.let { loginResponse ->
-                if (loginResponse.success == "true") {
-                    TokenStorage.accessToken = loginResponse.response?.token
-                    toastString(LoginViewModel.LOGIN_SUCCESS)
-                    binding.buttonLogin.visibility = View.GONE
-                    binding.buttonLogout.visibility = View.VISIBLE
-                } else {
-                    TokenStorage.accessToken = null
-                    toastString(LoginViewModel.WRONG_LOGIN_OR_PASSWORD)
-                }
-            }
+            loginViewModel.logout()
+            toastString(LoginViewModel.LOGOUT_SUCCESS)
+            binding.buttonLogin.visibility = View.VISIBLE
+            binding.buttonLogout.visibility = View.GONE
+            binding.textInputPassword.setText("")
+            binding.textInputLogin.setText("")
         }
 
         loginViewModel.errorLogin.launchAndCollectIn(viewLifecycleOwner){

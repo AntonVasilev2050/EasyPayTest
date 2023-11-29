@@ -2,7 +2,6 @@ package com.avv2050soft.easypaytest.data.network.retrofit.repository
 
 import com.avv2050soft.easypaytest.data.network.retrofit.api.EasyPayApi
 import com.avv2050soft.easypaytest.data.network.retrofit.mappers.RetrofitMapper
-import com.avv2050soft.easypaytest.domain.TokenStorage
 import com.avv2050soft.easypaytest.domain.models.LoginRequest
 import com.avv2050soft.easypaytest.domain.models.login.LoginResponse
 import com.avv2050soft.easypaytest.domain.models.payments.PaymentsResponse
@@ -20,8 +19,8 @@ class NetworkRepositoryImpl @Inject constructor(
         return mapper.mapPaymentsResponseDtoToPaymentsResponse(EasyPayApi.create().getPayments(token))
     }
 
-    override suspend fun logout(): Boolean {
-
-        return true
+    override suspend fun logout(): LoginResponse {
+        val loginRequest = LoginRequest("", "")
+        return  mapper.mapLoginResponseDtoToLoginResponse(EasyPayApi.create().login(loginRequest))
     }
 }

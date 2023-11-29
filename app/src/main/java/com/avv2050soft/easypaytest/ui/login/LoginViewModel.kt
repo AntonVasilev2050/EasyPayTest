@@ -40,13 +40,17 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun logout(): Boolean {
-        var logoutResult = false
+    fun logout() {
         viewModelScope.launch {
-            logoutResult = logoutUseCase.logout()
-            loginUseCase.login(LoginRequest("", ""))
+            kotlin.runCatching {
+                loginResponse = logoutUseCase.logout()
+            }.onSuccess {
+                _loginResponseStateFlow.value = loginResponse
+            }.onFailure {
+                _errorLogin.send(it.message.toString())
+                Log.d("data test", it.message.toString())
+            }
         }
-        return logoutResult
     }
 
     companion object {

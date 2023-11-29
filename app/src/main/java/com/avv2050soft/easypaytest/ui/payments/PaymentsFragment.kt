@@ -10,7 +10,6 @@ import com.avv2050soft.easypaytest.databinding.FragmentPaymentsBinding
 import com.avv2050soft.easypaytest.domain.TokenStorage
 import com.avv2050soft.easypaytest.ui.adapters.PaymentsAdapter
 import com.avv2050soft.easypaytest.ui.utils.launchAndCollectIn
-import com.avv2050soft.easypaytest.ui.utils.toastString
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
