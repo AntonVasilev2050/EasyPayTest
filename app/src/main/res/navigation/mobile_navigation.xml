@@ -13,9 +13,7 @@
         <action
             android:id="@+id/action_navigation_login_to_navigation_payments"
             app:destination="@id/navigation_payments"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation_login"
-            app:popUpToInclusive="true" />
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
@@ -26,9 +24,7 @@
         <action
             android:id="@+id/action_navigation_payments_to_navigation_login"
             app:destination="@id/navigation_login"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation_payments"
-            app:popUpToInclusive="true" />
+            app:launchSingleTop="true" />
     </fragment>
 
 </navigation>

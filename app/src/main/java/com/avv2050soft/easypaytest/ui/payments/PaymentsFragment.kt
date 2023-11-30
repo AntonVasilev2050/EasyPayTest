@@ -10,6 +10,7 @@ import com.avv2050soft.easypaytest.databinding.FragmentPaymentsBinding
 import com.avv2050soft.easypaytest.domain.TokenStorage
 import com.avv2050soft.easypaytest.ui.adapters.PaymentsAdapter
 import com.avv2050soft.easypaytest.ui.utils.launchAndCollectIn
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,5 +30,8 @@ class PaymentsFragment : Fragment(R.layout.fragment_payments) {
                 binding.rvPayments.adapter = paymentsAdapter
             }
         }
+
+        activity?.findViewById<BottomNavigationItemView>(R.id.navigation_login)?.visibility =
+            View.GONE
     }
 }

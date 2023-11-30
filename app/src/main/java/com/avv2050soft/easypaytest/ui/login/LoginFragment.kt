@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.avv2050soft.easypaytest.R
 import com.avv2050soft.easypaytest.databinding.FragmentLoginBinding
@@ -57,6 +58,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         TokenStorage.accessToken = loginResponse.response?.token
                         toastString(LoginViewModel.LOGIN_SUCCESS)
                         setLoginButtonVisible(false)
+                        findNavController().navigate(R.id.action_navigation_login_to_navigation_payments)
                     } else {
                         TokenStorage.accessToken = null
                         toastString(LoginViewModel.WRONG_LOGIN_OR_PASSWORD)
