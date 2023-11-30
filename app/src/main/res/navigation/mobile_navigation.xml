@@ -13,6 +13,7 @@
         <action
             android:id="@+id/action_navigation_login_to_navigation_payments"
             app:destination="@id/navigation_payments"
+            app:launchSingleTop="true"
             app:popUpTo="@id/navigation_login"
             app:popUpToInclusive="true" />
     </fragment>
@@ -21,6 +22,13 @@
         android:id="@+id/navigation_payments"
         android:name="com.avv2050soft.easypaytest.ui.payments.PaymentsFragment"
         android:label="@string/payments"
-        tools:layout="@layout/fragment_payments" />
+        tools:layout="@layout/fragment_payments" >
+        <action
+            android:id="@+id/action_navigation_payments_to_navigation_login"
+            app:destination="@id/navigation_login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_payments"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

@@ -22,6 +22,28 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (TokenStorage.accessToken.isNullOrEmpty()) {
+            setLoginButtonVisible(true)
+            waitForLogin()
+        } else {
+            setLoginButtonVisible(false)
+            waitForLogout()
+        }
+
+        loginViewModel.errorLogin.launchAndCollectIn(viewLifecycleOwner) {
+            toastString(it)
+        }
+    }
+
+    private fun waitForLogout() {
+        binding.buttonLogout.setOnClickListener {
+            loginViewModel.logout()
+            toastString(LoginViewModel.LOGOUT_SUCCESS)
+            setLoginButtonVisible(true)
+        }
+    }
+
+    private fun waitForLogin() {
         binding.buttonLogin.setOnClickListener {
             loginViewModel.loginResponseStateFlow.launchAndCollectIn(viewLifecycleOwner) {
                 val loginRequest = LoginRequest(
@@ -34,8 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     if (loginResponse.success == "true") {
                         TokenStorage.accessToken = loginResponse.response?.token
                         toastString(LoginViewModel.LOGIN_SUCCESS)
-                        binding.buttonLogin.visibility = View.GONE
-                        binding.buttonLogout.visibility = View.VISIBLE
+                        setLoginButtonVisible(false)
                     } else {
                         TokenStorage.accessToken = null
                         toastString(LoginViewModel.WRONG_LOGIN_OR_PASSWORD)
@@ -43,18 +64,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 }
             }
         }
+    }
 
-        binding.buttonLogout.setOnClickListener {
-            loginViewModel.logout()
-            toastString(LoginViewModel.LOGOUT_SUCCESS)
+    private fun setLoginButtonVisible(visible: Boolean) {
+        if (visible) {
             binding.buttonLogin.visibility = View.VISIBLE
             binding.buttonLogout.visibility = View.GONE
             binding.textInputPassword.setText("")
             binding.textInputLogin.setText("")
-        }
-
-        loginViewModel.errorLogin.launchAndCollectIn(viewLifecycleOwner){
-            toastString(it)
+        } else {
+            binding.buttonLogin.visibility = View.GONE
+            binding.buttonLogout.visibility = View.VISIBLE
         }
     }
 }
